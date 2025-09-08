@@ -6,7 +6,7 @@
 /*   By: earnera <earnera@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:58:24 by earnera           #+#    #+#             */
-/*   Updated: 2025/08/28 18:26:09 by earnera          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:19:17 by earnera          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,11 @@ int main()
     ScalarConverter::convert("-42");
     std::cout << "\n ☆---------------------------------★ Test 4 ★----------------------------------☆" << std::endl;
     ScalarConverter::convert("42.42");
+    std::cout << "\n ☆---------------------------------★ Test 5 ★----------------------------------☆" << std::endl;
+    ScalarConverter::convert("nan");
+    std::cout << "\n ☆---------------------------------★ Test 6 ★----------------------------------☆" << std::endl;
+    ScalarConverter::convert("+inf");
+    std::cout << "\n ☆---------------------------------★ Test 7 ★----------------------------------☆" << std::endl;
+    ScalarConverter::convert("-inff");
+
 }

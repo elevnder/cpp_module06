@@ -20,6 +20,7 @@
 #include <cstdlib>
 #include <limits>
 #include <climits>
+#include <iomanip>
 
 #define BOLDGREEN "\e[1;38;5;156m"
 #define BOLDPURPLE "\e[1;38;5;147m"
@@ -57,7 +58,6 @@ class ScalarConverter
                     ScalarConverter( ScalarConverter&);
                 /*Destructeurs*/
                     ~ScalarConverter();
-                    static double stod(std::string &str);
 
 };
 
