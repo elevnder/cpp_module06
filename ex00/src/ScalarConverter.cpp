@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/ScalarConverter.hpp"
 
 /********************************************CONSTRUCTEURS********************************************************** */
@@ -22,6 +21,16 @@ ScalarConverter::ScalarConverter(ScalarConverter&) {
 
 }
 ScalarConverter::~ScalarConverter() {}
+
+/********************************************CONVERSION*TYPE********************************************************** */
+
+ double my_stod(const std::string &str)
+{
+    double value;
+    std::stringstream ss(str);
+    ss >> value;
+    return (value);
+}
 
 /********************************************DETECTION*DE*TYPE********************************************************** */
 
@@ -44,7 +53,9 @@ bool isInt(const std::string &str) {
 }
 
 bool isFloat(const std::string &str) {
-    if (str.size() < 2 || str.back() != 'f') return false;
+    int j = str.size() - 1;
+    if (str.size() < 2 || str[j] != 'f') 
+        return false;
     bool hasDot = false;
     for (size_t i = 0; i < str.size() - 1; i++) {
         if (i == 0 && (str[i] == '+' || str[i] == '-')) 
@@ -89,85 +100,63 @@ int getType(const std::string &str) {
 /********************************************PRINTS********************************************************** */
 
 
-// void printChar(double value){
-//     if (value < CHAR_MIN || value > CHAR_MAX)
-//         std::cout << "char: impossible" << std::endl;
-//     else {
-//         char c = static_cast<char>(value);
-//         if (isprint(c))
-//             std::cout << BOLDBLUE << "char: '" << c << "'" << DEFAULTCOL << std::endl;
-//         else
-//             std::cout << BOLDBLUE << "char: Non displayable" << DEFAULTCOL << std::endl;
-//     }
-// }
-
-
-// void printInt(double value) {
-//     if (value < INT_MIN || value > INT_MAX)
-//         std::cout << BOLDGREEN << "int: impossible" << DEFAULTCOL << std::endl;
-//     else
-//         std::cout << BOLDGREEN << "int: " << static_cast<int>(value) << DEFAULTCOL << std::endl;
-// }
-
-// void printFloat(double value) {
-//     float f = static_cast<float>(value); // on caste ici
-//     if (f == static_cast<int>(f))
-//         std::cout << std::fixed << std::setprecision(1);
-//     else
-//         std::cout << std::fixed << std::setprecision(6);
-//     std::cout << BOLDYELLOW << "float: " << f << "f" << std::endl;
-// }
-
-// void printDouble(double value) {
-//     if (value == static_cast<int>(value))
-//         std::cout << BOLDPEACH << std::fixed << DEFAULTCOL << std::setprecision(1);
-//     else
-//         std::cout << std::fixed << std::setprecision(6);
-//     std::cout << BOLDPEACH << "double: " << value << DEFAULTCOL << std::endl;
-// }
-
-void printChar(double value) {
+void printChar(double value){
     if (value < CHAR_MIN || value > CHAR_MAX)
-        std::cout << "char: impossible\n";
+        std::cout << "char: impossible" << std::endl;
     else {
         char c = static_cast<char>(value);
-        std::cout << "char: " << (isprint(c) ? std::string("'") + c + "'" : "Non displayable") << std::endl;
+        if (isprint(c))
+            std::cout << BOLDBLUE << "char: '" << c << "'" << DEFAULTCOL << std::endl;
+        else
+            std::cout << BOLDBLUE << "char: Non displayable" << DEFAULTCOL << std::endl;
     }
 }
 
+
 void printInt(double value) {
-    if (value < INT_MIN || value > INT_MAX) std::cout << "int: impossible\n";
-    else std::cout << "int: " << static_cast<int>(value) << std::endl;
+    if (value < INT_MIN || value > INT_MAX)
+        std::cout << BOLDGREEN << "int: impossible" << DEFAULTCOL << std::endl;
+    else
+        std::cout << BOLDGREEN << "int: " << static_cast<int>(value) << DEFAULTCOL << std::endl;
 }
 
 void printFloat(double value) {
-    float f = static_cast<float>(value);
-    std::cout << "float: " << std::fixed << std::setprecision((f == static_cast<int>(f)) ? 1 : 6) << f << "f" << std::endl;
+    float f = static_cast<float>(value); // on caste ici
+    if (f == static_cast<int>(f))
+        std::cout << std::fixed << std::setprecision(1);
+    else
+        std::cout << std::fixed << std::setprecision(6);
+    std::cout << BOLDYELLOW << "float: " << f << "f" << std::endl;
 }
 
 void printDouble(double value) {
-    std::cout << "double: " << std::fixed << std::setprecision((value == static_cast<int>(value)) ? 1 : 6) << value << std::endl;
+    if (value == static_cast<int>(value))
+        std::cout << BOLDPEACH << std::fixed << DEFAULTCOL << std::setprecision(1);
+    else
+        std::cout << std::fixed << std::setprecision(6);
+    std::cout << BOLDPEACH << "double: " << value << DEFAULTCOL << std::endl;
 }
+
 
 
 void printPseudoLiteral(const std::string &str) {
     if (str == "nan" || str == "nanf") {
-        std::cout << BOLDBLUE << "char: impossible" << std::endl;
-        std::cout << BOLDGREEN << "int: impossible" << std::endl;
-        std::cout << BOLDYELLOW << "float: nanf" << std::endl;
-        std::cout << BOLDPEACH << "double: nan" << std::endl;
+        std::cout << BOLDBLUE << "char: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDGREEN << "int: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDYELLOW << "float: nanf" << DEFAULTCOL << std::endl;
+        std::cout << BOLDPEACH << "double: nan" << DEFAULTCOL << std::endl;
     }
     else if (str == "+inf" || str == "+inff") {
-        std::cout << BOLDBLUE << "char: impossible" << std::endl;
-        std::cout << BOLDGREEN << "int: impossible" << std::endl;
-        std::cout << BOLDYELLOW << "float: +inff" << std::endl;
-        std::cout << BOLDPEACH << "double: +inf" << std::endl;
+        std::cout << BOLDBLUE << "char: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDGREEN << "int: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDYELLOW << "float: +inff" << DEFAULTCOL << std::endl;
+        std::cout << BOLDPEACH << "double: +inf" << DEFAULTCOL << std::endl;
     }
     else if (str == "-inf" || str == "-inff") {
-        std::cout << BOLDBLUE << "char: impossible" << std::endl;
-        std::cout << BOLDGREEN << "int: impossible" << std::endl;
-        std::cout << BOLDYELLOW <<"float: -inff" << std::endl;
-        std::cout << BOLDPEACH <<"double: -inf" << std::endl;
+        std::cout << BOLDBLUE << "char: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDGREEN << "int: impossible" << DEFAULTCOL << std::endl;
+        std::cout << BOLDYELLOW <<"float: -inff" << DEFAULTCOL << std::endl;
+        std::cout << BOLDPEACH <<"double: -inf" << DEFAULTCOL << std::endl;
     }
 }
 
@@ -178,6 +167,7 @@ void ScalarConverter::convert(const std::string &str) {
 
     switch (type) {
         case 1: { // char
+            std::cout << BOLDPURPLE << "Type : char ! 😊" << DEFAULTCOL << std::endl;
             char c = str[0];
             double value = static_cast<double>(c);
             printChar(value);
@@ -187,7 +177,8 @@ void ScalarConverter::convert(const std::string &str) {
             break;
         }
         case 2: { // int
-            int i = std::stoi(str);
+            std::cout << BOLDPURPLE << "Type : int ! 😊" << DEFAULTCOL << std::endl;
+            int i = std::atoi(str.c_str());
             double value = static_cast<double>(i);
             printChar(value);
             printInt(value);
@@ -196,7 +187,8 @@ void ScalarConverter::convert(const std::string &str) {
             break;
         }
         case 3: { // float
-            float f = std::stof(str);
+            std::cout << BOLDPURPLE << "Type : float ! 😊" << DEFAULTCOL << std::endl;
+            float f = std::atof(str.c_str());
             double value = static_cast<double>(f);
             printChar(value);
             printInt(value);
@@ -205,7 +197,8 @@ void ScalarConverter::convert(const std::string &str) {
             break;
         }
         case 4: { // double
-            double d = std::stod(str);
+            std::cout << BOLDPURPLE << "Type : double ! 😊" << DEFAULTCOL << std::endl;
+            double d = my_stod(str);
             printChar(d);
             printInt(d);
             printFloat(d);
@@ -213,11 +206,12 @@ void ScalarConverter::convert(const std::string &str) {
             break;
         }
         case 5: { // pseudo-literal
+            std::cout << BOLDPURPLE << "Type : pseudo-literal... 🤔" << DEFAULTCOL << std::endl;
             printPseudoLiteral(str);
             break;
         }
         default:
-            std::cout << "Invalid input\n";
+            std::cout << BOLDRED << "Invalid input ! 😱\n" << DEFAULTCOL << std::endl;
             break;
     }
 }
