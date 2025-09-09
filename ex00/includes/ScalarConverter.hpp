@@ -48,7 +48,7 @@ class ScalarConverter
                 /*Getters*/
                 /*Setters*/
                 /*Méthodes*/
-                static void    convert(std::string string);
+                static void    convert(const std::string &string);
                 /*Exceptions*/
                 
 
